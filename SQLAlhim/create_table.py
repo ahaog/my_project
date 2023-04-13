@@ -21,7 +21,7 @@ class Students(SqlAlchemyBase):
 class Statistics(SqlAlchemyBase):
     __tablename__ = "statistics"
     id = sa.Column(sa.Integer, primary_key=True)
-    speed = sa.Column(sa.Integer, nullable=True)
+    speed = sa.Column(sa.Float, nullable=True)
     authenticity = sa.Column(sa.Float, nullable=True)
     last_entry_time = sa.Column(sa.DateTime, default=datetime.now)
     print_language = sa.Column(sa.String(2), nullable=True)
