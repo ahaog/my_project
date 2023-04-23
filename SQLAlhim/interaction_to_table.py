@@ -54,8 +54,9 @@ def add_to_table(list_values):
 # add_to_table(testData)
 
 
-def taking_data(id_of_student, list_of_values):
-    for student_ib in db_sess.query(ct.Students).filter(ct.Students.id.like(id_of_student)):
+def taking_data(name_of_student, list_of_values):
+    for student_ib in db_sess.query(ct.Students).filter(ct.Students.name.like(name_of_student)):
+        id_of_student = student_ib.id
         for statistics_in_base in db_sess.query(ct.Statistics).filter(ct.Statistics.user_id == id_of_student):
             list_of_values.append(statistics_in_base.speed)
             list_of_values.append(statistics_in_base.authenticity)
@@ -63,7 +64,7 @@ def taking_data(id_of_student, list_of_values):
             list_of_values.append(statistics_in_base.print_language)
 
 
-taking_data(1, data_taken)
+taking_data("user2", data_taken)
 print(data_taken)
 
 """
