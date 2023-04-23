@@ -9,6 +9,8 @@ testData = [["user1", 100, 10.1, "2010-10-10 21:16:57.720240", "RUS"],
 
 db_sess = ct.sa.orm.create_session(bind=ct.engine)
 
+data_taken = []
+
 
 def add_to_table(list_values):
     for index, received_data in enumerate(list_values, start=1):
@@ -49,7 +51,20 @@ def add_to_table(list_values):
         db_sess.commit()
 
 
-add_to_table(testData)
+# add_to_table(testData)
+
+
+def taking_data(id_of_student, list_of_values):
+    for student_ib in db_sess.query(ct.Students).filter(ct.Students.id.like(id_of_student)):
+        for statistics_in_base in db_sess.query(ct.Statistics).filter(ct.Statistics.user_id == id_of_student):
+            list_of_values.append(statistics_in_base.speed)
+            list_of_values.append(statistics_in_base.authenticity)
+            list_of_values.append(statistics_in_base.last_entry_time)
+            list_of_values.append(statistics_in_base.print_language)
+
+
+taking_data(1, data_taken)
+print(data_taken)
 
 """
 for i in db_sess.query(ct.Statistics).all():
